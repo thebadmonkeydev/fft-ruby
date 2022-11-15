@@ -1,4 +1,4 @@
-# Fft::Ruby
+# Fft
 
 A reference/educational implementation of the Fast Fourier Transform (FFT) algorithm.
 
