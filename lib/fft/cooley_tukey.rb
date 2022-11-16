@@ -14,7 +14,7 @@ module Fft
     # @param samples [Array<Float>] An array of sinusoidal sample data
     def initialize(samples)
       @samples = samples
-      @sig_figs = BigDecimal(samples.first.to_s).precision
+      @sig_figs = 3
       validate!
     end
 
@@ -41,7 +41,9 @@ module Fft
         out << if index > nyquist
           0.0
         else
-          2*(Math.sqrt((BigDecimal(datum.real.to_s).round(sig_figs)**2) + (BigDecimal(datum.imag.to_s).round(sig_figs)**2)))/n
+          BigDecimal(
+            (2*(Math.sqrt((datum.real**2) + (datum.imag**2)))/n).to_s
+          ).round(sig_figs).to_f
         end
       end
 
