@@ -20,9 +20,9 @@ require 'fft'
 # 1 Hz sine wave sampled at 8Hz
 samples = {[0,0.707,1,0.707,0,-0.707, -1, -0.707])
 Fft.fft(samples)
-```
 
-Note on output, ruby as I know it isn't the best place for higher precision mathematics like this, the above sample will output the expected magnitude 1 1Hz frequency bucket, but it is slightly off by 8 parts in 100000 and there's an erroneous output of 7/100000 in the 3 Hz frequency bucket.  This is due to truncation with PI during calculation of the twiddle values.  This will be remedied in the future by pre-generating these values using a much more math-centric approach.
+=> [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+```
 
 ## Contributing
 
