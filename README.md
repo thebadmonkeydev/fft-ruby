@@ -22,7 +22,7 @@ samples = {[0,0.707,1,0.707,0,-0.707, -1, -0.707])
 Fft.fft(samples)
 
 # First term is the offset, then since we have 8 samples at 8Hz we
-# have 1Hz per index here showing an amplitude of 1 in the 1Hz bucket as
+# have 1Hz per index here showing an amplitude of 1 in the 1Hz bucket
 => [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 ```
 
