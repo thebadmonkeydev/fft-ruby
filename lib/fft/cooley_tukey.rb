@@ -30,6 +30,7 @@ module Fft
     end
 
     def finalize
+      n = samples.length
       nyquist = samples.length / 2
 
       out = []
@@ -37,7 +38,7 @@ module Fft
         out << if index > nyquist
           0.0
         else
-          2*(Math.sqrt((datum.real**2) + (datum.imag**2)))
+          2*(Math.sqrt((datum.real**2) + (datum.imag**2)))/n
         end
       end
 
@@ -65,6 +66,8 @@ module Fft
         end
       end
 
+      # This is the primary reason for using a power of 2 for sample length
+      # it allows us to split the transforms evenly creating a balanced recursion tree
       even, odd = transform(even_samples), transform(odd_samples)
       results = [0] * n
 
@@ -73,7 +76,6 @@ module Fft
         # Can and should be calculated before-hand with a specific set of sample data sizes (i.e. 1024, 4096, etc.)
         twiddle = Complex::polar(1.0,-2*Math::PI*j/n)
 
-        #q = (twiddle**j) * odd[j]
         q = twiddle * odd[j]
         results[j] = even[j] + q
         results[j + (n/2)] = even[j] - q
