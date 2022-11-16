@@ -1,6 +1,6 @@
 # Fft
 
-A reference/educational implementation of the Fast Fourier Transform (FFT) algorithm.
+A reference/educational implementation of Fast Fourier Transform (FFT) algorithms.
 
 ## Installation
 
