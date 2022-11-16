@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
+require 'bigdecimal'
+
 module Fft
   # The CooleyTukey FFT algorithm is really just a specific case of a radix-n decimation-in-time
   # algorithm where n = 2.  It takes advantage of this assumption to allow for better reduction
   # of multiplicaitons through recursion to a base case.  In algorithm notation:
   class CooleyTukey
-    attr_accessor :raw, :samples
+    attr_accessor :raw, :samples, :sig_figs
 
     # Initialize an instance of this algorithm with a sample set
     #
     # @param samples [Array<Float>] An array of sinusoidal sample data
     def initialize(samples)
       @samples = samples
+      @sig_figs = BigDecimal(samples.first.to_s).precision
       validate!
     end
 
@@ -38,7 +41,7 @@ module Fft
         out << if index > nyquist
           0.0
         else
-          2*(Math.sqrt((datum.real**2) + (datum.imag**2)))/n
+          2*(Math.sqrt((BigDecimal(datum.real.to_s).round(sig_figs)**2) + (BigDecimal(datum.imag.to_s).round(sig_figs)**2)))/n
         end
       end
 
@@ -74,7 +77,7 @@ module Fft
       # This is another reason for making the assumption that n is a power of 2
       for j in 0..((n/2)-1)
         # Can and should be calculated before-hand with a specific set of sample data sizes (i.e. 1024, 4096, etc.)
-        twiddle = Complex::polar(1.0,-2*Math::PI*j/n)
+        twiddle = Complex::polar(1.0,-2*BigDecimal(Math::PI.to_s)*j/n)
 
         q = twiddle * odd[j]
         results[j] = even[j] + q
