@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "lib/fft/ruby/version"
+require_relative "lib/fft/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "fft-ruby"
+  spec.name = "fft"
   spec.version = Fft::Ruby::VERSION
   spec.authors = ["Michael Kelly"]
   spec.email = ["michaelkelly322@gmail.com"]
@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_development_dependency 'pry'
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
