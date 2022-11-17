@@ -29,7 +29,8 @@ module Fft
     protected
 
     def validate!
-      raise 'Sample set must be a power of 2' unless samples.length % 2 == 0
+      n = samples.length
+      raise 'Sample set must be a power of 2' unless (n & (n-1)) == 0
     end
 
     def finalize
