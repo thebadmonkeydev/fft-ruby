@@ -63,6 +63,8 @@ module Fft
         return samples
       end
 
+      # This is the primary reason for using a power of 2 for sample length
+      # it allows us to split the transforms evenly creating a balanced recursion tree
       even_samples, odd_samples = [], []
       samples.each_with_index do |datum, index|
         if index.even?
@@ -72,9 +74,8 @@ module Fft
         end
       end
 
-      # This is the primary reason for using a power of 2 for sample length
-      # it allows us to split the transforms evenly creating a balanced recursion tree
       even, odd = transform(even_samples), transform(odd_samples)
+
       results = [0] * n
 
       # This is another reason for making the assumption that n is a power of 2
