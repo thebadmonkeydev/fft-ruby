@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'version'
-require_relative 'cooley_tukey'
+require_relative 'fft/version'
+require_relative 'fft/cooley_tukey'
 
 require 'pry'
 
